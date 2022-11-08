@@ -50,7 +50,6 @@ def ingest_data():
             linea = " "+linea.strip()
         
         num_espacios = 0
-        print(num_espacios, linea)
         for char in linea:
             if char!=' ':
                 if num_espacios==1:
@@ -66,7 +65,6 @@ def ingest_data():
 
             elif len(fila_organizada)>0:
                 num_espacios +=1
-                print(num_espacios)
 
     fila_organizada = fila_organizada.replace(",;", ", ")
     fila_organizada = fila_organizada.replace(" %", "")
@@ -76,4 +74,4 @@ def ingest_data():
     df = pd.read_csv("datos_organizados.txt", sep=";")
     return df.principales_palabras_clave.to_list()[0]
 
-print(ingest_data())
+#ingest_data()

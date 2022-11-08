@@ -51,6 +51,9 @@ def ingest_data():
         
         num_espacios = 0
         for char in linea:
+            if char==',' and fila_organizada[-1].isdecimal():
+                char='.'
+                
             if char!=' ':
                 if num_espacios==1:
                     fila_organizada += ' '
@@ -66,6 +69,9 @@ def ingest_data():
             elif len(fila_organizada)>0:
                 num_espacios +=1
 
+        if fila_organizada[-1]=='.':
+            fila_organizada = fila_organizada.rstrip('.')
+
     fila_organizada = fila_organizada.replace(",;", ", ")
     fila_organizada = fila_organizada.replace(" %", "")
     datos_organizados.write(fila_organizada)
@@ -74,4 +80,3 @@ def ingest_data():
     df = pd.read_csv("datos_organizados.txt", sep=";")
     return df
 
-#ingest_data()

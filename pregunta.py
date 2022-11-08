@@ -44,12 +44,13 @@ def ingest_data():
         next(datos)
 
     ultimo_char = ''
+    fila_organizada = ""
     for linea in datos.readlines():
         if len(linea.lstrip(" "))>1:
             linea = " "+linea.strip()
-        fila_organizada = ""
-        num_espacios = 0
         
+        num_espacios = 0
+        print(num_espacios, linea)
         for char in linea:
             if char!=' ':
                 if num_espacios==1:
@@ -65,13 +66,14 @@ def ingest_data():
 
             elif len(fila_organizada)>0:
                 num_espacios +=1
+                print(num_espacios)
 
-        fila_organizada = fila_organizada.replace(",;", ", ")
-        fila_organizada = fila_organizada.replace(" %", "")
-        datos_organizados.write(fila_organizada)
+    fila_organizada = fila_organizada.replace(",;", ", ")
+    fila_organizada = fila_organizada.replace(" %", "")
+    datos_organizados.write(fila_organizada)
     
     datos_organizados.close()
     df = pd.read_csv("datos_organizados.txt", sep=";")
-    return df
+    return df.principales_palabras_clave.to_list()[0]
 
 print(ingest_data())

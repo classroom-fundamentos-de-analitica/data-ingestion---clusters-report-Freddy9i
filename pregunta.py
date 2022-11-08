@@ -72,6 +72,6 @@ def ingest_data():
     
     datos_organizados.close()
     df = pd.read_csv("datos_organizados.txt", sep=";")
-    return df.principales_palabras_clave.to_list()[0]
+    return df
 
 #ingest_data()

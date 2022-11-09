@@ -10,7 +10,6 @@ espacio entre palabra y palabra.
 
 """
 import pandas as pd
-import re
 
 def ingest_data():
 
@@ -46,7 +45,8 @@ def ingest_data():
     ultimo_char = ''
     fila_organizada = ""
     for linea in datos.readlines():
-        if len(linea.lstrip(" "))>1:
+        linea_sin_espacios = linea.lstrip(" ")
+        if len(linea_sin_espacios)>1:    
             linea = " "+linea.strip()
         
         num_espacios = 0
@@ -78,5 +78,7 @@ def ingest_data():
     
     datos_organizados.close()
     df = pd.read_csv("datos_organizados.txt", sep=";")
+    df["principales_palabras_clave"][7] = df["principales_palabras_clave"][7].strip()
     return df
+
 
